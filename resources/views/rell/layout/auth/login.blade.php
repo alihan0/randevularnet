@@ -1,6 +1,6 @@
 @extends('rell.auth')
 @section('title')
-    {{__('auth.login')}}
+    {{__('text.title.login')}}
 @endsection
 
 @section('content')
@@ -65,7 +65,7 @@
   
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form>
+              <form action="javascript:void(0)">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -75,17 +75,20 @@
   
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4">{{__('form.password')}}</label>
-                    <input type="password" id="form3Example4" class="form-control" />
+                    <label class="form-label" for="password">{{__('form.password')}}</label>
+                    <input type="password" id="password" class="form-control" />
                 </div>
   
                 <!-- Checkbox -->
                 
   
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4 ">
-                  Sign up
+                <button type="submit" class="btn btn-primary btn-block mb-4" id="BtnLogin">
+                  {{__('form.link.login')}}
                 </button>
+                <a href="/auth/reset-password" class="btn btn-block mb-4 float-end">
+                  {{__('form.link.forget_password')}}
+                </a>
                 
                 <!-- Register buttons -->
                 <div class="text-center">

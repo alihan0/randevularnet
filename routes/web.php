@@ -17,10 +17,11 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
-	
-
+Route::group([
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    
     Route::controller(MainController::class)->middleware('auth')->group(function(){
         Route::get('/', 'home');
     });
@@ -29,6 +30,4 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::controller(AuthController::class)->prefix('auth')->group(function(){
         Route::get('/login', 'login')->name('login');
     });
-
 });
-
