@@ -22,5 +22,9 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function login_control(Request $request){
+        return $this->response;
+    }
+
 
 }

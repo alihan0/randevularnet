@@ -29,5 +29,6 @@ Route::group([
 
     Route::controller(AuthController::class)->prefix('auth')->group(function(){
         Route::get('/login', 'login')->name('login');
+        Route::post('login', 'login_control');
     });
 });

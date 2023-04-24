@@ -1,5 +1,9 @@
 import axios from 'axios';
 import $ from 'jquery';
+import toastr from 'toastr';
+
+toastr.options.progressBar = true;
+toastr.options.timeOut = 2000;
 
 $("#BtnLogin").on("click", function(){
     let email = $("#email").val();
@@ -9,6 +13,6 @@ $("#BtnLogin").on("click", function(){
         email : email,
         password : password
     }).then((res)=>{
-        alert(res.data.message);
+        toastr[res.data.type](res.data.message);
     })
 });
