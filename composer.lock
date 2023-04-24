@@ -4,54 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33a46c05cfb0ccce9aa7b03f3f42f4a4",
+    "content-hash": "8e6e7fe5fd9d19060838a2fee2857ca4",
     "packages": [
-        {
-            "name": "alihan0/laravel-dorell",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alihan0/laravel-dorell.git",
-                "reference": "52a6c0ebc7f3d5b1447a348a6c7b85953effcc8e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alihan0/laravel-dorell/zipball/52a6c0ebc7f3d5b1447a348a6c7b85953effcc8e",
-                "reference": "52a6c0ebc7f3d5b1447a348a6c7b85953effcc8e",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Alihan0\\LaravelDorell\\DorellServiceProvider",
-                        "Alihan0\\LaravelDorell\\FileServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Alihan0\\LaravelDorell\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alihan Öztürk",
-                    "email": "alihan@metatige.com"
-                }
-            ],
-            "description": "laravel boilerplate",
-            "support": {
-                "issues": "https://github.com/alihan0/laravel-dorell/issues",
-                "source": "https://github.com/alihan0/laravel-dorell/tree/main"
-            },
-            "time": "2023-04-17T17:18:54+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -7869,9 +7823,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "alihan0/laravel-dorell": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
