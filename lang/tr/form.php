@@ -8,6 +8,9 @@ return [
 
     "link" => [
         "login" => "Oturum Aç",
-        "forget_password" => "Şifreni mi unuttun?"
+        "register" => "Hesap Oluştur",
+        "forget_password" => "Şifreni mi unuttun?",
+        "free_register_now" => "Hemen Ücretsiz Hesap Oluştur",
+        "have_account" => "Zaten hesabın var mı?",
     ],
 ];

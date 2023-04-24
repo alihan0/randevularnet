@@ -5,3 +5,4 @@ import 'toastr/build/toastr.min.js';
 
 // AUTH
 import './auth/login';
+import './auth/register.js';

@@ -52,11 +52,12 @@
       <div class="row gx-lg-5 align-items-center" style="padding-top:150px">
         <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10;">
           <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            {!!__('text.login.title')!!}
+            {!!__('text.title.login')!!}
           </h1>
           <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-            {{__('text.login.desc')}}
+            {{__('text.auth.desc')}}
           </p>
+          <p class="text-white">{{__('text.auth.dont_have_account')}}</p><a href="/auth/register" class="btn btn-outline-warning">{{__('form.link.free_register_now')}}</a>
         </div>
   
         <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
@@ -92,7 +93,7 @@
                 
                 <!-- Register buttons -->
                 <div class="text-center">
-                  <p>{{__('text.login.or_sign')}}:</p>
+                  <p>{{__('text.auth.or_sign')}}:</p>
                   <button type="button" class="btn btn-outline-primary mx-1">
                     <i class="fab fa-facebook-f"></i>
                   </button>
