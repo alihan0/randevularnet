@@ -5,20 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class MainController extends Controller
+class AuthController extends Controller
 {
     
+
 
     // Response all post
     protected $response = ["type" => "warning", "message" => "MainController", "Response", "status" => false];
 
     public function __construct()
     {
-        View::addLocation(resource_path("views/rell/layout/main"));
+        View::addLocation(resource_path("views/rell/layout/auth"));
+    }
+
+    public function login(){
+        return view('login');
     }
 
 
-    public function home(){
-        return view('dashboard');
-    }
 }

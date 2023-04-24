@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -20,10 +21,14 @@ use App\Http\Controllers\MainController;
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
 	
 
-    Route::controller(MainController::class)->group(function(){
+    Route::controller(MainController::class)->middleware('auth')->group(function(){
         Route::get('/', 'home');
     });
 
+
+    Route::controller(AuthController::class)->prefix('auth')->group(function(){
+        Route::get('/login', 'login')->name('login');
+    });
 
 });
 
