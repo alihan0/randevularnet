@@ -1,6 +1,6 @@
 <?php
  
-namespace App\Console\Commands;
+ namespace App\Console\Commands;
  
 
 use Illuminate\Console\Command;
@@ -59,6 +59,8 @@ class Dorell extends Command
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+
 use App\Models\\'.$model_name.';
 
 class '.$controller_name.' extends Controller
@@ -67,24 +69,29 @@ class '.$controller_name.' extends Controller
     // Response all post
     protected $response = ["type" => "warning", "message" => "'.$controller_name.' Response", "status" => false];
 
+    public function __construct()
+    {
+        View::addLocation(resource_path("views/rell/layout/'.$name.'"));
+    }
+
     // List All Datas
     public function all(){
-        return view("rell.layout.'.$name.'.all", ["'.$name.'" => '.$model_name.'::all()]);
+        return view("all", ["'.$name.'" => '.$model_name.'::all()]);
     }
 
     // Detail Selected Data
     public function detail($id){
-        return view("rell.layout.'.$name.'.detail", ["'.$name.'" => '.$model_name.'::find($id)]);
+        return view("detail", ["'.$name.'" => '.$model_name.'::find($id)]);
     }
 
     // Add Ne Data;
     public function new(){
-        return view("rell.layout.'.$name.'.new");
+        return view("new");
     }
 
     // Edit Selected Data
     public function edit($id){
-        return view("rell.layout.'.$name.'.edit", ["'.$name.'" => '.$model_name.'::find($id)]);
+        return view("edit", ["'.$name.'" => '.$model_name.'::find($id)]);
     }
 
     // Insert New Data
@@ -144,9 +151,5 @@ class '.$controller_name.' extends Controller
         } else {
             $this->info('- Do:Rell !! Controller File not found! : ' .$controller_name);
         }
-
-
-        
-
     }
 }
