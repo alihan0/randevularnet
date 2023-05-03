@@ -116,3 +116,24 @@
   </section>
   <!-- Section: Design Block -->
 @endsection
+
+@section('script')
+    <script>
+      $("#BtnLogin").on("click", function(){
+        let email = $("#email").val();
+        let password = $("#password").val();
+
+        axios.post('/auth/login', {
+            email : email,
+            password : password
+        }).then((res)=>{
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.assign('/');
+                }, 1500);
+            }
+        })
+    });
+    </script>
+@endsection

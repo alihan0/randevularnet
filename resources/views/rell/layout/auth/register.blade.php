@@ -119,3 +119,30 @@
   </section>
   <!-- Section: Design Block -->
 @endsection
+
+@section('script')
+    <script>
+      $("#BtnRegister").on("click", function(){
+        let firstname = $("#firstname").val();
+        let lastname = $("#lastname").val();
+        let email = $("#email").val();
+        let password = $("#password").val();
+        let company = $("#company").val();
+
+        axios.post('/auth/register', {
+            firstname : firstname,
+            lastname : lastname,
+            email : email,
+            password : password,
+            company:company
+        }).then((res)=>{
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.assign('/');
+                }, 1500);
+            }
+        })
+    });
+    </script>
+@endsection

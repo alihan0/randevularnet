@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - {{config('app.name')}}</title>
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    <!-- Bootstrap Css -->
+    <link href="/static/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"/>
     <style>
         .bd-placeholder-img {
           font-size: 1.125rem;
@@ -82,5 +87,17 @@
 </head>
 <body>
     @yield('content')
+
+<script src="/static/assets/libs/jquery/jquery.min.js"></script>
+<script src="/static/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script>
+  toastr.options.progressBar = true;
+  toastr.options.timeOut = 1500;
+</script>
+@yield('script')
+
 </body>
 </html>

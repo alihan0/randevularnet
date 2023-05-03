@@ -4,6 +4,7 @@ return [
     "title" => [
         "login" => "Oturum Aç",
         "register" => "Hesap Oluştur",
+        "home" => "Anasayfa"
     ],
     "auth" => [
         "title" => 'Randevular.NET\'in <span style="color: hsl(218, 81%, 75%)">Dünyasına Katıl</span>',
