@@ -13,4 +13,5 @@ return [
         "have_account" => "Zaten hesabın var mı?",
         "dont_have_account" => "Bir hesabın yok mu?",
     ],
+    "copy" => "Tüm hakları saklıdır."
 ];

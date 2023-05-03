@@ -497,11 +497,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Qovex.
+                            Copright © <script>document.write(new Date().getFullYear())</script> -  {{env('APP_NAME')}} | {{__('text.copy')}}
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Themesbrand
+                                {{env('APP_VERSION')}}
                             </div>
                         </div>
                     </div>
