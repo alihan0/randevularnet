@@ -33,34 +33,16 @@
                 <div class="container-fluid">
                     <div class="float-end">
 
-                        <div class="dropdown d-inline-block d-lg-none ms-2">
-                            <button type="button" class="btn header-item noti-icon waves-effect"
-                                id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="mdi mdi-magnify"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                aria-labelledby="page-header-search-dropdown">
-
-                                <form class="p-3">
-                                    <div class="m-0">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search ..."
-                                                aria-label="Recipient's username">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit"><i
-                                                        class="mdi mdi-magnify"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-none d-lg-inline-block ms-1">
-                            <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
-                                <i class="fas fa-moon"></i>
-                            </button>
+                        
+                        
+                        <div class="dropdown d-none d-lg-inline-block ">
+                            
+                                <div class="btn  form-check form-switch theme-switch">
+                                    <input class="form-check-input waves-effec theme-choice " type="checkbox" role="switch" id="dark-mode-switch"
+                                    data-bsStyle="/static/assets/css/bootstrap-dark.min.css" data-appStyle="/static/assets/css/app-dark.min.css" >
+                                  </div>
+                        
+                              
                         </div>
 
                         <div class="dropdown d-none d-sm-inline-block">
@@ -70,10 +52,14 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode, null, [], true)}}" class="dropdown-item notify-item">
+                                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode, null, [], true)}}" class="dropdown-item notify-item theme-choice"
+                                    {{$properties["align"] == "right" ? 'id="rtl-mode-switch"
+                                    data-appStyle="/static/assets/css/app-rtl.min.css"' : ''}}
+                                    >
                                         <img src="/static/assets/images/flags/{{$localeCode}}.png" alt="user-image" class="me-1" height="12">
                                         <span>
                                             {{$properties['native']}}
+                                            {{$properties['align']}}
                                         </span>
                                     </a>
                                 @endforeach
@@ -234,181 +220,9 @@
                         </button>
 
                         <!-- App Search-->
-                        <form class="app-search d-none d-lg-inline-block">
-                            <div class="position-relative">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="bx bx-search-alt"></span>
-                            </div>
-                        </form>
+                        
 
-                        <div class="dropdown dropdown-mega d-none d-lg-inline-block ms-2">
-                            <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
-                                aria-haspopup="false" aria-expanded="false">
-                                Mega Menu
-                                <i class="mdi mdi-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-megamenu">
-                                <div class="row">
-                                    <div class="col-sm-6">
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14 mt-0">UI Components</h5>
-                                                <ul class="list-unstyled megamenu-list text-muted">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Lightbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Range Slider</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Sweet Alert</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Rating</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Forms</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Tables</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Charts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14 mt-0">Applications</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Ecommerce</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Calendar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Email</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Tasks</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Contacts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14 mt-0">Extra Pages</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Light Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Compact Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Horizontal layout</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Maintenance</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Coming Soon</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Timeline</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">FAQs</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <h5 class="font-size-14 mt-0">Components</h5>
-                                                <div class="px-lg-2">
-                                                    <div class="row g-0">
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/github.png" alt="Github">
-                                                                <span>GitHub</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/bitbucket.png" alt="bitbucket">
-                                                                <span>Bitbucket</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/dribbble.png" alt="dribbble">
-                                                                <span>Dribbble</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row g-0">
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/dropbox.png" alt="dropbox">
-                                                                <span>Dropbox</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/mail_chimp.png" alt="mail_chimp">
-                                                                <span>Mail Chimp</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a class="dropdown-icon-item" href="#">
-                                                                <img src="/static/assets/images/brands/slack.png" alt="slack">
-                                                                <span>Slack</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div>
-                                                    <div class="card text-white mb-0 overflow-hidden text-white-50"
-                                                        style="background-image: url('/static/assets/images/megamenu-img.png');background-size: cover;">
-                                                        <div class="card-img-overlay"></div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-xl-6">
-                                                                    <h4 class="text-white mb-3">Sale</h4>
-
-                                                                    <h5 class="text-white-50">Up to <span
-                                                                            class="font-size-24 text-white">50 %</span> Off</h5>
-                                                                    <p>At vero eos accusamus et iusto odio.</p>
-                                                                    <div class="mb-4">
-                                                                        <a href="#" class="btn btn-success btn-sm">View more</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        
                     </div>
 
                 </div>
