@@ -3,7 +3,7 @@
 return [
     "email" => "E-posta",
     "password" => "Şifre",
-
+    "company_name" => "Firma Adı",
 
 
     "link" => [

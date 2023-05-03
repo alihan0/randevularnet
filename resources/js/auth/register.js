@@ -11,12 +11,14 @@ $("#BtnRegister").on("click", function(){
     let lastname = $("#lastname").val();
     let email = $("#email").val();
     let password = $("#password").val();
+    let company = $("#company").val();
 
     axios.post('/auth/register', {
         firstname : firstname,
         lastname : lastname,
         email : email,
-        password : password
+        password : password,
+        company:company
     }).then((res)=>{
         toastr[res.data.type](res.data.message);
         if(res.data.status){

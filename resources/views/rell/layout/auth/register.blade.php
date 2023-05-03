@@ -1,6 +1,6 @@
 @extends('rell.auth')
 @section('title')
-    {{__('text.title.login')}}
+    {{__('text.title.register')}}
 @endsection
 
 @section('content')
@@ -68,6 +68,11 @@
             <div class="card-body px-4 py-5 px-md-5">
               <form action="javascript:void(0)">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
+                <!-- Company input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="company">{{__('form.company_name')}}</label>
+                  <input type="text" id="company" class="form-control" />
+                </div>
                 <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
@@ -105,22 +110,6 @@
                   {{__('form.link.have_account')}}
                 </a>
                 
-                <!-- Register buttons -->
-                <div class="text-center">
-                  <p>{{__('text.auth.or_sign')}}:</p>
-                  <button type="button" class="btn btn-outline-primary mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-  
-                  <button type="button" class="btn btn-outline-danger  mx-1">
-                    <i class="fab fa-google"></i>
-                  </button>
-  
-                  <button type="button" class="btn btn-outline-info mx-1">
-                    <i class="fab fa-apple"></i>
-                  </button>
-
-                </div>
               </form>
             </div>
           </div>

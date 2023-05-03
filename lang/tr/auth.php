@@ -18,7 +18,8 @@ return [
         "firstname" => "Ad",
         "lastname" => "Soyad",
         "email" => "Eposta",
-        "password" => "Şifre"
+        "password" => "Şifre",
+        "company" => "Firma",
     ],
 
 ];

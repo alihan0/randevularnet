@@ -62,7 +62,9 @@ class AuthController extends Controller
     public function register_control(Request $request){
 
 
-        if(empty($request->firstname)){
+        if(empty($request->company)){
+            $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.company')]);
+        }elseif(empty($request->firstname)){
             $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.firstname')]);
         }elseif(empty($request->lastname)){
             $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.lastname')]);
@@ -81,6 +83,7 @@ class AuthController extends Controller
                     $this->response["message"] = __('auth.messages.email-already-exist');
                 }else{
                     $user = new User;
+                    $user->company = trim($this->pre_up($request->company));
                     $user->firstname = trim($this->pre_up($request->firstname));
                     $user->lastname = trim($this->pre_up($request->lastname));
                     $user->email = trim($request->email);
@@ -115,18 +118,26 @@ class AuthController extends Controller
 
     function pre_up($str) {
         $lowercaseTurkishChars = array('ı', 'i', 'ş', 'ğ', 'ü', 'ö', 'ç');
-        $firstChar = mb_substr($str, 0, 1, 'UTF-8');
-        $restOfString = mb_substr($str, 1, null, 'UTF-8');
+        $words = preg_split('/\s+/u', $str);
+        $result = '';
         
-        if (in_array($firstChar, $lowercaseTurkishChars)) {
-          $firstChar = mb_strtoupper($firstChar, 'UTF-8');
-        } else {
-          $firstChar = mb_strtoupper($firstChar, 'UTF-8');
-          $restOfString = mb_strtolower($restOfString, 'UTF-8');
+        foreach ($words as $word) {
+          $firstChar = mb_substr($word, 0, 1, 'UTF-8');
+          $restOfString = mb_substr($word, 1, null, 'UTF-8');
+          
+          if (in_array($firstChar, $lowercaseTurkishChars)) {
+            $firstChar = mb_strtoupper($firstChar, 'UTF-8');
+          } else {
+            $firstChar = mb_strtoupper($firstChar, 'UTF-8');
+            $restOfString = mb_strtolower($restOfString, 'UTF-8');
+          }
+          
+          $result .= $firstChar . $restOfString . ' ';
         }
         
-        return $firstChar . $restOfString;
+        return rtrim($result);
       }
+      
       
     
 }
