@@ -103,6 +103,16 @@ class AuthController extends Controller
         return $this->response;
     }
 
+    public function logout(Request $request){
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+
+    }
+
+
     function pre_up($str) {
         $lowercaseTurkishChars = array('ı', 'i', 'ş', 'ğ', 'ü', 'ö', 'ç');
         $firstChar = mb_substr($str, 0, 1, 'UTF-8');
