@@ -166,30 +166,25 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="/static/assets/images/users/avatar-2.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">Patrick</span>
+                                <span class="d-none d-xl-inline-block ms-1">{{Auth::user()->firstname.' '.Auth::user()->lastname}}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i>
-                                    Profile</a>
-                                <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> My
-                                    Wallet</a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i
-                                        class="bx bx-wrench font-size-16 align-middle me-1"></i> Settings</a>
+                                    {{__('text.menu.profile')}}</a>
+                                
+                                <a class="dropdown-item d-block" href="#"><i
+                                        class="bx bx-wrench font-size-16 align-middle me-1"></i> {{__('text.menu.settings')}}</a>
                                 <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i>
-                                    Lock screen</a>
+                                    {{__('text.menu.lock')}}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i
-                                        class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item text-danger" href="/auth/logout"><i
+                                        class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> {{__('text.menu.logout')}}</a>
                             </div>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                                <i class="mdi mdi-settings-outline"></i>
-                            </button>
-                        </div>
+                        
 
                     </div>
                     <div>
@@ -239,7 +234,7 @@
 
             <div class="mt-3">
 
-                <a href="#" class="text-dark fw-medium font-size-16">Patrick Becker</a>
+                <a href="#" class="text-dark fw-medium font-size-16">{{Auth::user()->firstname}}</a>
                 <p class="text-body mt-1 mb-0 font-size-13">UI/UX Designer</p>
 
             </div>

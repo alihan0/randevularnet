@@ -13,5 +13,11 @@ return [
         "have_account" => "Zaten hesabın var mı?",
         "dont_have_account" => "Bir hesabın yok mu?",
     ],
-    "copy" => "Tüm hakları saklıdır."
+    "copy" => "Tüm hakları saklıdır.",
+    "menu" => [
+        "profile" => "Profil",
+        "settings" => "Ayarlar",
+        "lock" => "Ekranı Kilitle",
+        "logout" => "Çıkış Yap",
+    ],
 ];
