@@ -3,7 +3,7 @@ import $ from 'jquery';
 import toastr from 'toastr';
 
 toastr.options.progressBar = true;
-toastr.options.timeOut = 2000;
+toastr.options.timeOut = 1500;
 toastr.options.escapeHtml = true;
 
 $("#BtnRegister").on("click", function(){
@@ -22,7 +22,7 @@ $("#BtnRegister").on("click", function(){
         if(res.data.status){
             setInterval(() => {
                 window.location.assign('/');
-            }, 2000);
+            }, 1500);
         }
     })
 });

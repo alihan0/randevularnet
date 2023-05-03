@@ -3,7 +3,7 @@ import $ from 'jquery';
 import toastr from 'toastr';
 
 toastr.options.progressBar = true;
-toastr.options.timeOut = 2000;
+toastr.options.timeOut = 1500;
 
 $("#BtnLogin").on("click", function(){
     let email = $("#email").val();
@@ -14,5 +14,10 @@ $("#BtnLogin").on("click", function(){
         password : password
     }).then((res)=>{
         toastr[res.data.type](res.data.message);
+        if(res.data.status){
+            setInterval(() => {
+                window.location.assign('/');
+            }, 1500);
+        }
     })
 });

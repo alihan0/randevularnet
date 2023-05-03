@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Lang;
@@ -30,6 +32,30 @@ class AuthController extends Controller
     }
 
     public function login_control(Request $request){
+
+        if(empty($request->email)){
+            $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.email')]);
+        }elseif(empty($request->password)){
+            $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.password')]);
+        }else{
+            if(Auth::attempt(["email" => $request->email, "password" => $request->password])){
+                if(Auth::user()->status == 1){
+
+                    $request->session()->regenerate();
+                    Auth::login(Auth::user());
+
+                    $this->response["type"] = "success";
+                    $this->response["message"] = __('auth.messages.success_login');
+                    $this->response["status"] = true;
+                }else{
+                    $this->response["type"] = "error";
+                    $this->response["message"] = __('auth.messages.login_permission_denied');
+                }
+            }else{
+                $this->response["message"] = __('auth.messages.incorrect_login');
+            }
+        }
+
         return $this->response;
     }
 
@@ -55,9 +81,9 @@ class AuthController extends Controller
                     $this->response["message"] = __('auth.messages.email-already-exist');
                 }else{
                     $user = new User;
-                    $user->firstname = $request->firstname;
-                    $user->lastname = $request->lastname;
-                    $user->email = $request->email;
+                    $user->firstname = trim($this->pre_up($request->firstname));
+                    $user->lastname = trim($this->pre_up($request->lastname));
+                    $user->email = trim($request->email);
                     $user->password = Hash::make($request->password);
                     $user->status = 1;
 
@@ -77,5 +103,20 @@ class AuthController extends Controller
         return $this->response;
     }
 
-
+    function pre_up($str) {
+        $lowercaseTurkishChars = array('ı', 'i', 'ş', 'ğ', 'ü', 'ö', 'ç');
+        $firstChar = mb_substr($str, 0, 1, 'UTF-8');
+        $restOfString = mb_substr($str, 1, null, 'UTF-8');
+        
+        if (in_array($firstChar, $lowercaseTurkishChars)) {
+          $firstChar = mb_strtoupper($firstChar, 'UTF-8');
+        } else {
+          $firstChar = mb_strtoupper($firstChar, 'UTF-8');
+          $restOfString = mb_strtolower($restOfString, 'UTF-8');
+        }
+        
+        return $firstChar . $restOfString;
+      }
+      
+    
 }
