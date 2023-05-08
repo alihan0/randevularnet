@@ -85,10 +85,10 @@
                                 <div class="p-3">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h6 class="m-0"> Notifications </h6>
+                                            <h6 class="m-0"> {{__('text.menu.notifications')}} </h6>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="#!" class="small"> View All</a>
+                                            <a href="#!" class="small"> {{__('text.menu.view-all')}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="p-2 border-top d-grid">
                                     <a class="btn btn-sm btn-link font-size-14 " href="javascript:void(0)">
-                                        <i class="mdi mdi-arrow-right-circle me-1"></i> View More..
+                                        <i class="mdi mdi-arrow-right-circle me-1"></i> {{__('text.menu.view-more')}}
                                     </a>
                                 </div>
                             </div>
@@ -277,9 +277,9 @@
                         <span>{{__('text.menu.customers')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html">Alerts</a></li>
-                        <li><a href="ui-buttons.html">Buttons</a></li>
-                        <li><a href="ui-cards.html">Cards</a></li>
+                        <li><a href="ui-alerts.html">{{__('text.menu.customer-groups')}}</a></li>
+                        <li><a href="ui-buttons.html">{{__('text.menu.customer-list')}}</a></li>
+                        <li><a href="ui-cards.html">{{__('text.menu.directory')}}</a></li>
                     </ul>
                 </li>
                 <li>
@@ -288,9 +288,9 @@
                         <span>{{__('text.menu.staff')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html">Alerts</a></li>
-                        <li><a href="ui-buttons.html">Buttons</a></li>
-                        <li><a href="ui-cards.html">Cards</a></li>
+                        <li><a href="ui-alerts.html">{{__('text.menu.departments')}}</a></li>
+                        <li><a href="ui-buttons.html">{{__('text.menu.staff-list')}}</a></li>
+                        <li><a href="ui-buttons.html">{{__('text.menu.staff-access')}}</a></li>
                     </ul>
                 </li>
 
@@ -298,68 +298,89 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-clipboard-list-outline"></i>
-                        <span>Tables</span>
+                        <i class="fas fa-cash-register"></i>
+                        <span>{{__('text.menu.accounting')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.html">Basic Tables</a></li>
-                        <li><a href="tables-datatable.html">Data Tables</a></li>
-                        <li><a href="tables-responsive.html">Responsive Table</a></li>
-                        <li><a href="tables-editable.html">Editable Table</a></li>
+                        <li><a href="tables-basic.html">{{__('text.menu.balance')}}</a></li>
+                        <li><a href="tables-datatable.html">{{__('text.menu.invoices')}}</a></li>
+                        <li><a href="tables-responsive.html">{{__('text.menu.income-reports')}}</a></li>
+                        <li><a href="tables-editable.html">{{__('text.menu.expense-reports')}}</a></li>
+                        <li><a href="tables-editable.html">{{__('text.menu.new-invoice')}}</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-chart-donut"></i>
-                        <span>Charts</span>
+                        <i class="fas fa-percent"></i>
+                        <span>{{__('text.menu.promotion')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="charts-apex.html">Apex charts</a></li>
-                        <li><a href="charts-chartjs.html">Chartjs Chart</a></li>
-                        <li><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><a href="charts-knob.html">Jquery Knob Chart</a></li>
-                        <li><a href="charts-sparkline.html">Sparkline Chart</a></li>
+                        <li><a href="charts-apex.html">{{__('text.menu.offers')}}</a></li>
+                        <li><a href="charts-chartjs.html">{{__('text.menu.discount-coupons')}}</a></li>
+                        <li><a href="charts-flot.html">{{__('text.menu.birthday-discount')}}</a></li>
+                        <li><a href="charts-knob.html">{{__('text.menu.discount-groups')}}</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-title">{{__('text.menu.system')}}</li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-cog"></i>
+                        <span>{{__('text.menu.general-settings')}}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="icons-boxicons.html">{{__('text.menu.system-settings')}}</a></li>
+                        <li><a href="icons-materialdesign.html">{{__('text.menu.notification-settings')}}</a></li>
+                        <li><a href="icons-dripicons.html">{{__('text.menu.default-settings')}}</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-emoticon-happy-outline"></i>
-                        <span>Icons</span>
+                        <i class="fas fa-layer-group"></i>
+                        <span>{{__('text.menu.advanced-settings')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons.html">Boxicons</a></li>
-                        <li><a href="icons-materialdesign.html">Material Design</a></li>
-                        <li><a href="icons-dripicons.html">Dripicons</a></li>
-                        <li><a href="icons-fontawesome.html">Font awesome</a></li>
+                        <li><a href="maps-google.html">{{__('text.menu.api')}}</a></li>
+                        <li><a href="maps-vector.html">{{__('text.menu.configuration')}}</a></li>
+                        <li><a href="maps-vector.html">{{__('text.menu.localization')}}</a></li>
+                        <li><a href="maps-vector.html">{{__('text.menu.export-import')}}</a></li>
+                        <li><a href="maps-vector.html">{{__('text.menu.maintance')}}</a></li>
+                        <li><a href="maps-vector.html">{{__('text.menu.backup')}}</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-map-marker-outline"></i>
-                        <span>Maps</span>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <i class="fas fa-thermometer-three-quarters"></i>
+                        <span>{{__('text.menu.system-status')}}</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google.html">Google Maps</a></li>
-                        <li><a href="maps-vector.html">Vector Maps</a></li>
-                    </ul>
                 </li>
 
+                <li class="menu-title">{{__('text.menu.help')}}</li>
+
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <i class="fas fa-info-circle"></i>
+                        <span>{{__('text.menu.how-to-use')}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <i class="fas fa-question-circle"></i>
+                        <span>{{__('text.menu.faq')}}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-file-tree"></i>
-                        <span>Multi Level</span>
+                        <i class="fas fa-life-ring"></i>
+                        <span>{{__('text.menu.support')}}</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="javascript: void(0);">Level 1.1</a></li>
-                        <li><a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="javascript: void(0);">Level 2.1</a></li>
-                                <li><a href="javascript: void(0);">Level 2.2</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="javascript: void(0);">{{__('text.menu.new-ticket')}}</a></li>
+                        <li><a href="javascript: void(0);">{{__('text.menu.my-tickets')}}</a></li>
                     </ul>
                 </li>
 
@@ -404,9 +425,16 @@
                         <div class="col-sm-6">
                             Copright © <script>document.write(new Date().getFullYear())</script> -  {{env('APP_NAME')}} | {{__('text.copy')}}
                         </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                {{env('APP_VERSION')}}
+                        
+                        <div class="col-sm-6 float-end">
+                            <div class="text-sm-end d-none d-sm-block float-end">
+                                <a href="#" data-bs-toggle="tooltip" title="{{__('text.menu.patch-notes')}}">{{env('APP_VERSION')}}</a>
+                            </div>
+                            <div class="text-sm-end d-none d-sm-block float-end me-2 border-end">
+                                <a href="#">{{__('text.menu.contracts')}}</a>
+                            </div>
+                            <div class="text-sm-end d-none d-sm-block float-end me-2 border-end">
+                                <a href="#">{{__('text.menu.time-line')}}</a>
                             </div>
                         </div>
                     </div>
