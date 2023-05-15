@@ -24,8 +24,8 @@ class AuthController extends Controller
         View::addLocation(resource_path("views/rell/layout/auth"));
     }
 
-    public function login(){
-        return view('login');
+    public function login(Request $request){
+        return view('login', ['email' => $request->input('email')]);
     }
     public function register(){
         return view('register');
@@ -62,9 +62,7 @@ class AuthController extends Controller
     public function register_control(Request $request){
 
 
-        if(empty($request->company)){
-            $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.company')]);
-        }elseif(empty($request->firstname)){
+        if(empty($request->firstname)){
             $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.firstname')]);
         }elseif(empty($request->lastname)){
             $this->response["message"] = __('auth.messages.empty-field', ['field' => __('auth.fields.lastname')]);
@@ -83,7 +81,6 @@ class AuthController extends Controller
                     $this->response["message"] = __('auth.messages.email-already-exist');
                 }else{
                     $user = new User;
-                    $user->company = trim($this->pre_up($request->company));
                     $user->firstname = trim($this->pre_up($request->firstname));
                     $user->lastname = trim($this->pre_up($request->lastname));
                     $user->email = trim($request->email);
@@ -94,6 +91,7 @@ class AuthController extends Controller
                             $this->response["type"] = "success";
                             $this->response["message"] = __('auth.messages.account-created');
                             $this->response["status"] = true;
+                            $this->response["email"] = $user->email; 
                         }else{
                             $this->response["type"] = "error";
                             $this->response["message"] = "SYSTEM_ERROR";

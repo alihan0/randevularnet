@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DataController;
 
 
 
@@ -22,7 +24,7 @@ Route::group([
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
     
-    Route::controller(MainController::class)->middleware('auth')->group(function(){
+    Route::controller(MainController::class)->middleware(['auth','CheckCompany'])->group(function(){
         Route::get('/', 'home');
     });
 
@@ -31,7 +33,15 @@ Route::group([
         Route::get('/login', 'login')->name('login');
         Route::get('/register', 'register');
         Route::get('/logout', 'logout');
-        Route::post('login', 'login_control');
-        Route::post('register', 'register_control');
+        Route::post('/login', 'login_control');
+        Route::post('/register', 'register_control');
+    });
+
+    Route::controller(CompanyController::class)->prefix('company')->middleware(['auth','CheckCompany'])->group(function(){
+        Route::post('/check', 'check');
+    });
+
+    Route::controller(DataController::class)->prefix('data')->group(function(){
+        Route::post('/plan-detail', 'plan_detail');
     });
 });

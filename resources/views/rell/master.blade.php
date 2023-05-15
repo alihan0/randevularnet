@@ -415,7 +415,7 @@
                     </div>
                 </div>
                 <!-- end page title -->
-
+{{print_r(session()->all())}}
             </div>
             <!-- End Page-content -->
 
@@ -502,10 +502,17 @@
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
 
+
+
+@include('rell.src.modal')
+  
+
+
 <!-- JAVASCRIPT -->
 <!-- JAVASCRIPT -->
-<script src="/static/assets/libs/jquery/jquery.min.js"></script>
-<script src="/static/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
@@ -518,11 +525,119 @@
 <script>
   toastr.options.progressBar = true;
   toastr.options.timeOut = 1500;
+
+    $(document).on("input", "#companyname", function(){
+        let name = $(this)
+
+            if(name.val().length < 6){
+                name.addClass('border border-2 border-danger')
+                $("#choosePlan").addClass("d-none")
+            }else{
+                name.removeClass('border border-2 border-danger')
+                name.addClass('border border-2 border-success')
+                $("#choosePlan").removeClass("d-none")
+                $(document).on("click", "#choosePlan", function(){
+                $(this).html('').addClass('btn-warning').html('<i class="fas fa-spin fa-spinner"></i>')
+                
+                
+            })
+            }
+
+            
+    })
+    
+    $(document).on("click", "#choosePlan", function(){
+        let company = $("#companyname").val();
+        $("#companyModalBody").hide();
+        $("#choosePlanModalBody").removeClass('d-none');
+        $("#modalDialog").addClass('modal-lg')
+    })
+
+    $(document).on("click", ".choosePlanBtn", function(){
+        let company = $("#companyname").val();
+        let plan = $(this).attr('id');
+        $("#choosePlanModalBody").addClass('d-none');
+        $("#choosePeriodModalBody").removeClass('d-none');
+        $("#modalDialog").addClass('modal-xl')
+        $("#companyNameVal").html(company)
+        
+
+        axios.post('/data/plan-detail', {plan:plan}).then(res=>{
+
+            let price = parseFloat(res.data.price);
+            let ucaylik = (price * 3) - ((price * 3) * (parseFloat(res.data.discount_per3) / 100)) 
+            let altiaylik = (price * 6) - ((price * 6) * (parseFloat(res.data.discount_per6) / 100))
+            let year = (price * 12) - ((price * 12) * (parseFloat(res.data.discount_peryear) / 100))
+
+            $("#planVal").html(res.data.title);
+            $("#aylik").html(price.toFixed(2))
+            $("#ucaylik").html(ucaylik.toFixed(2))
+            $("#altiaylik").html(altiaylik.toFixed(2))
+            $("#yillik").html(year.toFixed(3))
+            $("#PlanIdData").val(res.data.id)
+
+            if(res.data.discount_per3 > 0){
+                $("#ucaylikbadge").addClass('bg-success').html('-'+res.data.discount_per3+'%')
+            }
+
+            if(res.data.discount_per6 > 0){
+                $("#altiaylikbadge").addClass('bg-success').html('-'+res.data.discount_per6+'%')
+            }
+
+            if(res.data.discount_peryear > 0){
+                $("#yillikbadge").addClass('bg-success').html('-'+res.data.discount_peryear+'%')
+            }
+            
+
+        })
+
+        $(document).on("click", ".choosePeriodBtn", function(){
+            let period = $(this).attr('id');
+            $(".choosePeriodBtn").removeClass('btn-primary text-white')
+            $(this).addClass('btn-primary text-white');
+          
+            $("#companyNameData").val(company)
+            
+            $("#PeriodData").val(period)
+
+            if(period == 1) {
+                $("#PriceData").val($("#aylik").text())
+            }else if(period == 2) {
+                $("#PriceData").val($("#ucaylik").text())
+            }else if(period == 3) {
+                $("#PriceData").val($("#altiaylik").text())
+            }else if(period == 4) {
+                $("#PriceData").val($("#yillik").text())
+            }
+
+            $("#companyCreate").removeClass('d-none');
+        })
+
+        $(document).on("click", "#companyCreate", function(){
+            let formData = $("#companyCreateForm").serialize();
+
+            axios.post('/company/check', formData)
+                .then(res => {
+                    if(!res.data.status){
+                        $(this).html('').removeClass('btn-warning').addClass('btn-success').html('Oluştur')
+                    }else{
+                        window.location.reload();
+                        $("#companyModal").modal('hide');
+                    }
+                })
+        })
+    })
 </script>
 @yield('script')
 
 
-
+@if(session('showCompanyModal'))
+    <script>
+        $(document).ready(function(){
+            $("#companyModal").modal('show');
+        })
+    </script>
+@endif
 
 <!-- App js -->
 

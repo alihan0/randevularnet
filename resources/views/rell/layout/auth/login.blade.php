@@ -71,7 +71,7 @@
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <label class="form-label" for="email">{{__('form.email')}}</label>
-                    <input type="text" id="email" class="form-control" />
+                    <input type="text" id="email" class="form-control" value="{{$email}}"/>
                 </div>
   
                 <!-- Password input -->

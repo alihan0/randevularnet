@@ -69,10 +69,7 @@
               <form action="javascript:void(0)">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <!-- Company input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="company">{{__('form.company_name')}}</label>
-                  <input type="text" id="company" class="form-control" />
-                </div>
+                
                 <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
@@ -136,12 +133,11 @@
             password : password,
             company:company
         }).then((res)=>{
-            toastr[res.data.type](res.data.message);
-            if(res.data.status){
-                setInterval(() => {
-                    window.location.assign('/');
-                }, 1500);
-            }
+           if(!res.data.status){
+            toastr[res.data.type](res.data.message)
+           }else{
+            window.location.assign('/auth/login?email='+res.data.email)
+           }
         })
     });
     </script>
