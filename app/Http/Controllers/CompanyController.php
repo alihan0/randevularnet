@@ -63,6 +63,7 @@ class CompanyController extends Controller
 
                 if($item->save()){
                     $this->response['status'] = true;
+                    Notification::info("Yeni Fatura Oluşturuldu", Auth::user()->id, '/invoice/detail/'.$inv->id);
                 }
             }
         }
