@@ -415,7 +415,7 @@
                     </div>
                 </div>
                 <!-- end page title -->
-{{print_r(session()->all())}}
+
             </div>
             <!-- End Page-content -->
 
