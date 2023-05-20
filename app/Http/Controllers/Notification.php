@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Notifirell;
+use App\Models\Notifications;
 use App\Models\User;
+
+use App\Events\NotificationSent;
 
 use Auth;
 
@@ -76,4 +78,6 @@ class Notification extends Controller
             $notification->save();
         }
     }
+
+
 }

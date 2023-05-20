@@ -52,7 +52,7 @@ class CompanyController extends Controller
             $inv->sub_total = $request->PriceData + ($request->PriceData * 18) / 100;
             $inv->status = 1;
             $inv->last_payment = Carbon::now()->addDays(5);
-            
+            Notification::info("Yeni Şirket Oluşturuldu", Auth::user()->id, '/company/'.$company->id);
             if($inv->save()){
                 $item = new InvoiceItem;
                 $item->invoice = $inv->id;

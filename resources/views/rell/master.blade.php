@@ -16,6 +16,9 @@
     <!-- App Css-->
     <link href="/static/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
+    <link href="
+https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-animation.min.css
+" rel="stylesheet">
 </head>
 
 <body data-layout="detached" data-topbar="colored">
@@ -73,12 +76,15 @@
                             </button>
                         </div>
 
-                        <div class="dropdown d-inline-block">
+                        <div  id="notification-menu" class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon waves-effect"
                                 id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                <i class="mdi mdi-bell-outline"></i>
-                                <span class="badge rounded-pill bg-danger ">3</span>
+                                <input type="hidden" id="notification-count" value="{{$notifications->count()}}">
+                               
+
+                                <i class="fas fa-bell {{$notifications->count() > 0 ? 'faa-ring animated':''}}"></i><span class="badge rounded-pill bg-danger notification-count {{$notifications->count() > 0 ? '':'d-none'}}">{{$notifications->count()}}</span>
+
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                                 aria-labelledby="page-header-notifications-dropdown">
@@ -92,66 +98,36 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div data-simplebar style="max-height: 230px;">
-                                    <a href="" class="text-reset notification-item">
+                                <div id="notification-list" data-simplebar style="max-height: 230px;">
+                                    <div id="new-notification-line"></div>
+                                    @if ($notifications->count() > 0)
+                                    @foreach($notifications as $notification)
+                                    <a href="javascript:void(0)" data-id="{{$notification->id}}" data-url="{{$notification->redirect === 1 ? $notification->url : '' }}" class="text-reset notification-item notification-check">
                                         <div class="d-flex align-items-start">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="bx bx-cart"></i>
-                                                </span>
-                                            </div>
+                                            
+                                            <img src="/static/assets/icons/notification/{{$notification->icon}}.png" alt="" class="img-fluid me-3" width="50">
+                                              
+                                            
                                             <div class="flex-1">
-                                                <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                                <h6 class="mt-1 mb-1">{{ $notification->message }}</h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i>{{ $notification->created_at->diffForHumans() }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="" class="text-reset notification-item">
+                                    @endforeach
+                                    @else
+                                    <div class="text-center notification-item empty-notification-list">
                                         <div class="d-flex align-items-start">
-                                            <img src="/static/assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs"
-                                                alt="user-pic">
                                             <div class="flex-1">
-                                                <h6 class="mt-0 mb-1">James Lemire</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">It will seem like simplified English.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                                </div>
+                                                <h6 class="mt-0 mb-1 text-muted"><i>Hiç yeni bildirim yok...</i></h6>
+                                                
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex align-items-start">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                    <i class="bx bx-badge-check"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1">Your item is shipped</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex align-items-start">
-                                            <img src="/static/assets/images/users/avatar-4.jpg" class="me-3 rounded-circle avatar-xs"
-                                                alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mt-0 mb-1">Salena Layfield</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    </div>
+                                    @endif
+                                    
                                 </div>
                                 <div class="p-2 border-top d-grid">
                                     <a class="btn btn-sm btn-link font-size-14 " href="javascript:void(0)">
@@ -524,7 +500,90 @@
 <script src="/static/assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
 <script src="/static/assets/js/app.js"></script>
 <script src="/static/assets/js/pages/dashboard-2.init.js"></script>
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('ce5b02c6455dc752d04b', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('notifirell');
+    channel.bind('notifirell', function(data) {
+        var count = $("#notification-count").val()
+
+        if(count == 0){
+            count++
+            $(".fa-bell").addClass('faa-ring animated')
+            $(".notification-count").removeClass('d-none').text(count)
+            $("#notification-count").val(count)
+            $(".empty-notification-list").remove()
+        }else{
+            count++
+            $("#notification-count").val(count)
+            $(".notification-count").text(count)
+        }
+
+        
+
+        axios.post('/notification/push', data).then(res=>{
+            console.log('new notificaiton!')
+
+
+            var newNotification = '<a href="javascript:void(0)" data-id="'+res.data+'" data-url="'+data.url+'" class="text-reset notification-item notification-check"' +
+                            '<div class="d-flex align-items-start">' +
+                                '<img src="/static/assets/icons/notification/'+data.icon+'.png" alt="" class="img-fluid me-3" width="50">' +
+                                '<div class="flex-1">' +
+                                    '<h6 class="mt-1 mb-1">'+data.message+'</h6>' +
+                                    '<div class="font-size-12 text-muted">' +
+                                        '<p class="mb-0"><i class="mdi mdi-clock-outline"></i>Şimdi</p>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</a>';
+
+        $("#new-notification-line").prepend(newNotification)
+
+        })
+    });
+
+    $(document).on("click", ".notification-check", function(){
+        let url = $(this).attr('data-url')
+        let id = $(this).attr('data-id')
+        let count = $("#notification-count").val()
+        
+        axios.post('notification/read', {id:id}).then(res=>{
+            $(this).remove()
+            count--;
+
+            if(count == 0){
+                $(".fa-bell").removeClass('faa-ring animated')
+                $(".notification-count").remove()
+
+                $("#notification-list").append('<div class="text-center notification-item">'+
+                                        '<div class="d-flex align-items-start">'+
+                                            '<div class="flex-1">'+
+                                                '<h6 class="mt-0 mb-1 text-muted"><i>Hiç yeni bildirim yok...</i></h6>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>')
+            }else{
+                $(".fa-bell").addClass('faa-ring animated')
+                $("#notification-count").val(count)
+                $(".notification-count").text(count)
+            }
+
+            if(url !== ""){
+                window.location.assign('/'+url)
+            }
+        })
+    })
+  </script>
 <script>
+
+
   toastr.options.progressBar = true;
   toastr.options.timeOut = 1500;
 

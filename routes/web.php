@@ -6,8 +6,9 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\Notification;
 
-
+use App\Models\Notifications;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,27 @@ Route::group([
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
     
-    Route::controller(MainController::class)->middleware(['auth','CheckCompany'])->group(function(){
+    Route::controller(MainController::class)->middleware(['auth','CheckCompany', 'Notification'])->group(function(){
         Route::get('/', 'home');
+
+        // HELPER URL
+        Route::post('/notification/push', function(){
+            $n = Notifications::create([
+                'user' => Auth::user()->id,
+                'message' => request()->message,
+                'icon' => request()->icon,
+                'redirect' =>  request()->redirect,
+                'url' => request()->url,
+                'status' => 1,
+            ]);
+            return $n->id;
+        });
+        Route::post('/notification/read', function(){
+            $response = [];
+            $n = Notifications::find(request()->id);
+            $n->status = 0;
+            $n->save();
+        });
     });
 
 
@@ -43,5 +63,10 @@ Route::group([
 
     Route::controller(DataController::class)->prefix('data')->group(function(){
         Route::post('/plan-detail', 'plan_detail');
+    });
+
+    Route::get('/send-notification/{userId}/{message}', function ($userId, $message) {
+        $notification = new Notification();
+        return $notification->sendNotification($userId, $message);
     });
 });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
+use App\Events\Notifications;
+
 class MainController extends Controller
 {
     
@@ -19,6 +21,7 @@ class MainController extends Controller
 
 
     public function home(){
+        
         return view('dashboard');
     }
 }
