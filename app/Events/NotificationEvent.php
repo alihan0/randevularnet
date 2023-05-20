@@ -10,18 +10,26 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Notifications
+class NotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $user;
     public $message;
+    public $icon;
+    public $redirect;
+    public $url;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($message)
+    public function __construct($user, $message, $icon, $redirect, $url)
     {
+        $this->user = $user;
         $this->message = $message;
+        $this->icon = $icon;
+        $this->redirect = $redirect;
+        $this->url = $url;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Event;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\Notification;
 
 use App\Models\Notifications;
+
+use App\Events\NotificationEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +32,15 @@ Route::group([
         Route::get('/', 'home');
 
         // HELPER URL
+        Route::get('/notification/new', function(){
+
+            $user = Auth::user()->id;
+            $message = "test message";
+            $icon = "info";
+            $redirect = 0;
+            $url = null;
+            Event::dispatch(new NotificationEvent($user, $message, $icon, $redirect,  $url));
+        });
         Route::post('/notification/push', function(){
             $n = Notifications::create([
                 'user' => Auth::user()->id,
