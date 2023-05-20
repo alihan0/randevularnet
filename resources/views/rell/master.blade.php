@@ -8,7 +8,7 @@
     <meta content="Metatige Dijital" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <!-- Bootstrap Css -->
     <link href="/static/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -502,9 +502,11 @@ https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-anima
 <script src="/static/assets/js/pages/dashboard-2.init.js"></script>
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
   <script>
-
+    toastr.options.progressBar = true;
+    toastr.options.timeOut = 1500;
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
+    
 
     var pusher = new Pusher('ce5b02c6455dc752d04b', {
       cluster: 'eu'
@@ -530,9 +532,9 @@ https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-anima
 
         axios.post('/notification/push', data).then(res=>{
             console.log('new notificaiton!')
-
-
-            var newNotification = '<a href="javascript:void(0)" data-id="'+res.data+'" data-url="'+data.url+'" class="text-reset notification-item notification-check"' +
+            
+            
+            var newNotification = '<a href="javascript:void(0)" data-id="'+res.data+'" data-url="'+data.url+'" class="text-reset notification-item notification-check">' +
                             '<div class="d-flex align-items-start">' +
                                 '<img src="/static/assets/icons/notification/'+data.icon+'.png" alt="" class="img-fluid me-3" width="50">' +
                                 '<div class="flex-1">' +
@@ -545,6 +547,7 @@ https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-anima
                         '</a>';
 
         $("#new-notification-line").prepend(newNotification)
+        
 
         })
     });
@@ -584,9 +587,8 @@ https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-anima
 <script>
 
 
-  toastr.options.progressBar = true;
-  toastr.options.timeOut = 1500;
-
+  
+  
     $(document).on("input", "#companyname", function(){
         let name = $(this)
 
